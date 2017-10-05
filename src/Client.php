@@ -91,4 +91,11 @@ class Client
             ->withAddedHeader('apiKey', $this->apiKey);
         return $this->transport->send($request);
     }
+
+    public function getMyData()
+    {
+        $request = new Request\ListAllPropertiesRequest();
+        $response = $this->send($request);
+        return $response;
+    }
 }
