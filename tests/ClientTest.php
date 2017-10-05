@@ -22,6 +22,14 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $client = new Rentlio\Api\Client("04b028b0ac3b4e5882a0085cba36415f");
         $request = new Rentlio\Api\Request\GetMyDataRequest();
         $response = $client->send($request);
+        //var_dump(json_decode($response->getBody()->getContents()));
+        unset($client, $request, $response);
+    }
+
+    public function testListAllProperties() {
+        $client = new Rentlio\Api\Client("04b028b0ac3b4e5882a0085cba36415f");
+        $request = new Rentlio\Api\Request\ListAllPropertiesRequest();
+        $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
     }
 }
