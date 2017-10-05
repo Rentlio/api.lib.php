@@ -15,6 +15,13 @@ class ClientTest extends PHPUnit_Framework_TestCase
     {
         $client = new Rentlio\Api\Client("some api key");
         $this->assertTrue(is_object($client->setBaseUrl("https://api.rentl.io/v2")));
-        unset($var);
+        unset($client);
+    }
+
+    public function testGetMyData() {
+        $client = new Rentlio\Api\Client("04b028b0ac3b4e5882a0085cba36415f");
+        $request = new Rentlio\Api\Request\GetMyDataRequest();
+        $response = $client->send($request);
+        var_dump(json_decode($response->getBody()->getContents()));
     }
 }
