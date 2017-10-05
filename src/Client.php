@@ -94,7 +94,18 @@ class Client
 
     public function getMyData()
     {
-        $request = new Request\ListAllPropertiesRequest();
+        $request = $this->send(new Request\GetMyDataRequest());
+        return $request;
+    }
+
+    public function getListAllProperties(
+        $name = "",
+        $page = "",
+        $order_direction = "",
+        $order_by = ""
+        )
+    {
+        $request = new Request\ListAllPropertiesRequest($name, $page, $order_direction, $order_by);
         $response = $this->send($request);
         return $response;
     }

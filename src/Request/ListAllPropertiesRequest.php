@@ -5,15 +5,15 @@ namespace Rentlio\Api\Request;
 class ListAllPropertiesRequest extends AbstractRequest
 {
     protected $name;
-    
+
     public function __construct(
-        array $headers = [],
-        $body = null,
-        $version = '1.1',
         $name = "",
         $page = "",
         $order_direction = "",
-        $order_by = ""
+        $order_by = "",
+        array $headers = [],
+        $body = null,
+        $version = '1.1'
         )
     {
         $uri = "/properties?name=" . $name . "&page=" . $page . "&order_by=" .
