@@ -87,34 +87,11 @@ class Client
     public function send(RequestInterface $request)
     {
         $uri = new Uri($this->baseApiUrl . $request->getUri());
-        $uri = $this->applyQueryParams($uri, $request);
 
         $request = $request
             ->withUri($uri)
             ->withAddedHeader('apiKey', $this->apiKey);
 
         return $this->transport->send($request);
-    }
-
-    /**
-     * This method takes all query params from request and appends them to url
-     *
-     * @param UriInterface $uri
-     * @param RequestInterface $request
-     * @return \Psr\Http\Message\UriInterface|UriInterface
-     */
-    protected function applyQueryParams(UriInterface $uri, RequestInterface $request)
-    {
-        $sortAndPagingParams = $request->getSortAndPagingParams();
-        foreach ($sortAndPagingParams as $param => $value) {
-            $uri = Uri::withQueryValue($uri, $param, $value);
-        }
-
-        $queryParams = $request->getQueryParams();
-        foreach ($queryParams as $param => $value) {
-            $uri = Uri::withQueryValue($uri, $param, $value);
-        }
-
-        return $uri;
     }
 }

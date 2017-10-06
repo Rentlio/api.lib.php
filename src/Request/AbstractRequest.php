@@ -3,6 +3,7 @@
 namespace Rentlio\Api\Request;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
 
 abstract class AbstractRequest extends Request implements RequestInterface
 {
@@ -26,6 +27,27 @@ abstract class AbstractRequest extends Request implements RequestInterface
     {
         $this->page = $pageNumber;
         return $this;
+    }
+
+    /**
+     * This method takes all query params from request and appends them to url
+     *
+     * @return \Psr\Http\Message\UriInterface|UriInterface
+     */
+    public function getUri()
+    {
+        $uri                 = parent::getUri();
+        $sortAndPagingParams = $this->getSortAndPagingParams();
+        foreach ($sortAndPagingParams as $param => $value) {
+            $uri = Uri::withQueryValue($uri, $param, $value);
+        }
+
+        $queryParams = $this->getQueryParams();
+        foreach ($queryParams as $param => $value) {
+            $uri = Uri::withQueryValue($uri, $param, $value);
+        }
+
+        return $uri;
     }
 
     public function getSortAndPagingParams()
