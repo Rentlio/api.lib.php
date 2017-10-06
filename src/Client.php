@@ -3,7 +3,8 @@
 namespace Rentlio\Api;
 
 use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\UriInterface;
+use Rentlio\Api\Request\RequestInterface;
 
 class Client
 {
@@ -86,27 +87,34 @@ class Client
     public function send(RequestInterface $request)
     {
         $uri = new Uri($this->baseApiUrl . $request->getUri());
+        $uri = $this->applyQueryParams($uri, $request);
+
         $request = $request
             ->withUri($uri)
             ->withAddedHeader('apiKey', $this->apiKey);
+
         return $this->transport->send($request);
     }
 
-    public function getMyData()
+    /**
+     * This method takes all query params from request and appends them to url
+     *
+     * @param UriInterface $uri
+     * @param RequestInterface $request
+     * @return \Psr\Http\Message\UriInterface|UriInterface
+     */
+    protected function applyQueryParams(UriInterface $uri, RequestInterface $request)
     {
-        $request = $this->send(new Request\GetMyDataRequest());
-        return $request;
-    }
+        $sortAndPagingParams = $request->getSortAndPagingParams();
+        foreach ($sortAndPagingParams as $param => $value) {
+            $uri = Uri::withQueryValue($uri, $param, $value);
+        }
 
-    public function getListAllProperties(
-        $name = "",
-        $page = "",
-        $order_direction = "",
-        $order_by = ""
-        )
-    {
-        $request = new Request\ListAllPropertiesRequest($name, $page, $order_direction, $order_by);
-        $response = $this->send($request);
-        return $response;
+        $queryParams = $request->getQueryParams();
+        foreach ($queryParams as $param => $value) {
+            $uri = Uri::withQueryValue($uri, $param, $value);
+        }
+
+        return $uri;
     }
 }

@@ -6,18 +6,23 @@ class ListAllPropertiesRequest extends AbstractRequest
 {
     protected $name;
 
-    public function __construct(
-        $name = "",
-        $page = "",
-        $order_direction = "",
-        $order_by = "",
-        array $headers = [],
-        $body = null,
-        $version = '1.1'
-        )
+    public function __construct(array $headers = [], $body = null, $version = '1.1')
     {
-        $uri = "/properties?name=" . $name . "&page=" . $page . "&order_by=" .
-        $order_by . "&order_direction=" . $order_direction;        
-        parent::__construct("GET", $uri, $headers, $body, $version);
+        parent::__construct("GET", "/properties", $headers, $body, $version);
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueryParams()
+    {
+        return [
+            'name' => $this->name
+        ];
     }
 }

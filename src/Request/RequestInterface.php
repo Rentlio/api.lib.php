@@ -21,4 +21,14 @@ interface RequestInterface extends \Psr\Http\Message\RequestInterface
      * @return $this
      */
     public function setPage($pageNumber);
+
+    /**
+     * @return array
+     */
+    public function getSortAndPagingParams();
+
+    /**
+     * @return array
+     */
+    public function getQueryParams();
 }

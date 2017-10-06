@@ -27,4 +27,13 @@ abstract class AbstractRequest extends Request implements RequestInterface
         $this->page = $pageNumber;
         return $this;
     }
+
+    public function getSortAndPagingParams()
+    {
+        return [
+            'order_by'        => $this->sortBy,
+            'order_direction' => $this->sortOrder,
+            'page'            => $this->page
+        ];
+    }
 }
