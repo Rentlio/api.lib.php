@@ -22,13 +22,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
         //$response = $client->send($request);
         //var_dump(json_decode($response->getBody()->getContents()));
 
-        //$request = new Rentlio\Api\Request\ListAllPropertiesRequest();
-        //$request->setSortOrder('ASC');
-        //$response = $client->send($request);
-        //var_dump(json_decode($response->getBody()->getContents()));
+//        $request = new Rentlio\Api\Request\ListAllPropertiesRequest();
+//        $request->setSortOrder('ASC');
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
 
-        $request  = new Rentlio\Api\Request\ListUnitTypeAvailabilityRequest(5797);
+//        $request  = new Rentlio\Api\Request\ListUnitTypeAvailabilityRequest(4868);
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
+
+        $request = new Rentlio\Api\Request\ListUnitTypeRatesRequest(8805);
         $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
+
     }
 }
