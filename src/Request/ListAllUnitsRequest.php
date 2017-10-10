@@ -18,9 +18,7 @@ class ListAllUnitsRequest extends AbstractRequest
 
     public function getQueryParams()
     {
-        return [
-            'id' => $this->id
-        ];
+        return [];
     }
 }
 ?>

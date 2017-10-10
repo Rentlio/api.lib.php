@@ -34,7 +34,6 @@ class ListUnitTypeAvailabilityRequest extends AbstractRequest
     public function getQueryParams()
     {
         return [
-            'id' => $this->id,
             'dateFrom' => $this->dateFrom,
             'dateTo' => $this->dateTo
         ];
