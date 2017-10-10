@@ -31,9 +31,15 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
 
-        $request = new Rentlio\Api\Request\ListUnitTypeRatesRequest(8805);
-        $response = $client->send($request);
-        var_dump(json_decode($response->getBody()->getContents()));
+//        $request = new Rentlio\Api\Request\ListUnitTypeRatesRequest(8805);
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
+
+//        $request = new Rentlio\Api\Request\ListAvailableUnitTypesRequest(4868);
+//        $request->setDateFrom("2017-09-17");
+//        $request->setDateTo("2017-09-19");
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
 
     }
 }
