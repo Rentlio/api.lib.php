@@ -4,18 +4,12 @@ namespace Rentlio\Api\Request;
 
 class ListUnitTypeAvailabilityRequest extends AbstractRequest
 {
-    protected $id;
     protected $dateFrom;
     protected $dateTo;
 
     public function __construct($id, array $headers = [], $body = null, $version = '1.1')
     {
         parent::__construct("GET", "/properties/" . $id . "/unit-types", $headers, $body, $version);
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     public function setDateFrom($dateFrom)
