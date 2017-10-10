@@ -49,13 +49,16 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
 
-<<<<<<< HEAD
-        
-        $request  = new Rentlio\Api\Request\ListAllReservationsRequest();
-=======
-        $request  = new Rentlio\Api\Request\ListAllServicesForPropertyRequest(4868);
->>>>>>> 6c8a686d5110b77dd19e15e7b747150a38ad8d0b
-        $response = $client->send($request);
-        var_dump(json_decode($response->getBody()->getContents()));
+//        $request  = new Rentlio\Api\Request\ListAllServicesForPropertyRequest(4868);
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
+
+//        $request  = new Rentlio\Api\Request\ListAllServicesPaymentTypesRequest();
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
+
+//        $request  = new Rentlio\Api\Request\ListAllCurrenciesRequest();
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
     }
 }
