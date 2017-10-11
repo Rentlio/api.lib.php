@@ -1,6 +1,6 @@
 <?php
 
-class ListAllReservationsTodayForAUnitRequest extends PHPUnit_Framework_TestCase
+class ListAllReservationsTodayForAUnitRequestTest extends PHPUnit_Framework_TestCase
 {
     public function testRequestDefaultUri()
     {
