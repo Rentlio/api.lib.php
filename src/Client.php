@@ -94,4 +94,15 @@ class Client
 
         return $this->transport->send($request);
     }
+
+    public function sendPost(\Psr\Http\Message\RequestInterface $request)
+    {
+        $uri = new Uri($this->baseApiUrl . $request->getUri());
+
+        $request = $request
+            ->withUri($uri)
+            ->withAddedHeader('apiKey', $this->apiKey);
+
+        return $this->transport->send($request);
+    }
 }
