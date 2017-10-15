@@ -60,12 +60,20 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $request  = new Rentlio\Api\Request\ListAllCurrenciesRequest();
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
-        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-18");
+
+        $request  = new Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(8805);
+
+        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-15");
         $item->setPrice(15);
-        $item->setAvailability(0);
-        $body = ['days' => [$item->getArray()]];
-        $request  = new Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(8805, $body);
-        $response = $client->sendPost($request);
+        $item->setAvailability(1);
+        $request->addUpdate($item);
+
+        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-16");
+        $item->setPrice(16);
+        $item->setAvailability(2);
+        $request->addUpdate($item);
+        
+        $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
     }
 }

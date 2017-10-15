@@ -2,6 +2,7 @@
 
 namespace Rentlio\Api;
 
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
 use Rentlio\Api\Request\RequestInterface;
@@ -92,16 +93,9 @@ class Client
             ->withUri($uri)
             ->withAddedHeader('apiKey', $this->apiKey);
 
-        return $this->transport->send($request);
-    }
-
-    public function sendPost(\Psr\Http\Message\RequestInterface $request)
-    {
-        $uri = new Uri($this->baseApiUrl . $request->getUri());
-
-        $request = $request
-            ->withUri($uri)
-            ->withAddedHeader('apiKey', $this->apiKey);
+        if ($request->jsonSerialize() != null) {
+            $request = $request->withBody(Psr7\stream_for(json_encode($request->jsonSerialize())));
+        }
 
         return $this->transport->send($request);
     }
