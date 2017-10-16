@@ -17,7 +17,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetMyData()
     {
-        $client   = new Rentlio\Api\Client("2464ae701955457d8842da34ba166416");
+        $client   = new Rentlio\Api\Client("6d7b0cbb83174b188d579ad9a2182805");
 
         //$request  = new Rentlio\Api\Request\GetMyDataRequest();
         //$response = $client->send($request);
@@ -62,14 +62,15 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
 
-        $request = new Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(944711);
+        $request = new Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(937326);
 
-        $item = new Rentlio\Api\Model\InvoiceModel("Coca cola", 100, 1, "PDV", 25);
+        $item = new Rentlio\Api\Model\InvoiceModel("Coca cola", 100, 1);
         $item->setDiscountPercent(10);
+        $item->addTax("PDV", 25);
+        $item->setVatIncluded("N");
         $request->addUpdate($item);
 
         $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
-        */
     }
 }

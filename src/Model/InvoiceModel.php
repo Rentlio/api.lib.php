@@ -9,16 +9,24 @@ class InvoiceModel
     protected $vatIncluded;
     protected $quantity;
     protected $discountPercent;
-    protected $label;
-    protected $rate;
+    protected $taxes = [];
 
-    public function __construct($description, $price, $quantity, $label, $rate)
+    public function __construct($description, $price, $quantity)
     {
         $this->description = $description;
         $this->price = $price;
         $this->quantity = $quantity;
-        $this->label = $label;
-        $this->rate = $rate;
+    }
+
+    public function addTax($label, $rate)
+    {
+        if(count($this->taxes) < 2)
+        {
+            $this->taxes[] = array(
+                'label' => $label,
+                'rate' => $rate
+            );
+        }
     }
 
     public function setVatIncluded($vatIncluded)
@@ -39,12 +47,7 @@ class InvoiceModel
             'vatIncluded' => $this->vatIncluded,
             'quantity' => $this->quantity,
             'discountPercent' => $this->discountPercent,
-            'taxes' => array(
-                array(
-                    'label' => $this->label,
-                    'rate' => $this->rate
-                )
-            )
+            'taxes' => $this->taxes
         );
 
         $data = array_filter($data, function($var){ return $var !== null;});

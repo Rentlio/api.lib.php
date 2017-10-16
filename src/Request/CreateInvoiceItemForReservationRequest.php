@@ -31,6 +31,6 @@ class CreateInvoiceItemForReservationRequest extends AbstractRequest
 
     public function jsonSerialize()
     {
-        return [$this->update];
+        return $this->update;
     }
 }
