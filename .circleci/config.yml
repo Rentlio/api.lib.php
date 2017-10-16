@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/5.6-cli
+      - image: circleci/php:5.6.31-cli-node
 
     working_directory: ~/repo
 
