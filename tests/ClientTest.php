@@ -17,7 +17,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetMyData()
     {
-        $client   = new Rentlio\Api\Client("6d7b0cbb83174b188d579ad9a2182805");
+        $client   = new Rentlio\Api\Client("2464ae701955457d8842da34ba166416");
         //$request  = new Rentlio\Api\Request\GetMyDataRequest();
         //$response = $client->send($request);
         //var_dump(json_decode($response->getBody()->getContents()));
@@ -61,18 +61,28 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
 
-        $request  = new Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(8805);
+//        $request  = new Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(8805);
+//
+//        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-15");
+//        $item->setPrice(15);
+//        $item->setAvailability(1);
+//        $request->addUpdate($item);
+//
+//        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-16");
+//        $item->setPrice(16);
+//        $item->setAvailability(2);
+//        $request->addUpdate($item);
+//
+//        $response = $client->send($request);
+//        var_dump(json_decode($response->getBody()->getContents()));
 
-        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-15");
-        $item->setPrice(15);
-        $item->setAvailability(1);
+
+        $request = new Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(944711);
+
+        $item = new Rentlio\Api\Model\InvoiceModel("Coca cola", 100, 1, "PDV", 25);
+        $item->setDiscountPercent(10);
         $request->addUpdate($item);
 
-        $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-16");
-        $item->setPrice(16);
-        $item->setAvailability(2);
-        $request->addUpdate($item);
-        
         $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
     }
