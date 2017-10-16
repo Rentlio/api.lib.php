@@ -4,7 +4,6 @@ namespace Rentlio\Api;
 
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
-use Psr\Http\Message\UriInterface;
 use Rentlio\Api\Request\RequestInterface;
 
 class Client
