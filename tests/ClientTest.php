@@ -17,7 +17,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetMyData()
     {
-        $client   = new Rentlio\Api\Client("6d7b0cbb83174b188d579ad9a2182805");
+        //$client   = new Rentlio\Api\Client("6d7b0cbb83174b188d579ad9a2182805");
         //$request  = new Rentlio\Api\Request\GetMyDataRequest();
         //$response = $client->send($request);
         //var_dump(json_decode($response->getBody()->getContents()));
@@ -61,6 +61,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 //        $response = $client->send($request);
 //        var_dump(json_decode($response->getBody()->getContents()));
 
+        /*
         $request  = new Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(8805);
 
         $item = new Rentlio\Api\Model\AvailabilityModel("2017-10-15");
@@ -75,5 +76,6 @@ class ClientTest extends PHPUnit_Framework_TestCase
         
         $response = $client->send($request);
         var_dump(json_decode($response->getBody()->getContents()));
+        */
     }
 }
