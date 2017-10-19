@@ -4,9 +4,9 @@ namespace Rentlio\Api\Request;
 
 class ListAllCurrenciesRequest extends AbstractRequest
 {
-    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    public function __construct()
     {
-        parent::__construct("GET", "/enums/currencies", $headers, $body, $version);
+        parent::__construct("GET", "/enums/currencies");
     }
 
     public function getQueryParams()

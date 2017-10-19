@@ -4,9 +4,9 @@ namespace Rentlio\Api\Request;
 
 class ListAllUnitsRequest extends AbstractRequest
 {
-    public function __construct($id, array $headers = [], $body = null, $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("GET", "/properties/" . $id . "/units", $headers, $body, $version);
+        parent::__construct("GET", "/properties/" . $id . "/units");
     }
 
     public function getQueryParams()
@@ -14,4 +14,3 @@ class ListAllUnitsRequest extends AbstractRequest
         return [];
     }
 }
-?>

@@ -8,16 +8,16 @@ class UpdateAvailabilityAndRatesForUnitTypeRequest extends AbstractRequest
 {
     protected $updates = [];
 
-    public function __construct($id, $body = null, array $headers = [], $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("POST", "/unit-types/" . $id . "/availrates", $headers, $body, $version);
+        parent::__construct("POST", "/unit-types/" . $id . "/availrates");
     }
 
     public function addUpdate(AvailabilityModel $model)
     {
         $this->updates[] = $model->getArray();
     }
-    
+
     /**
      * @return array
      */

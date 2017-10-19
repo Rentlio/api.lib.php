@@ -4,14 +4,13 @@ namespace Rentlio\Api\Request;
 
 class ListAllServicesForPropertyRequest extends AbstractRequest
 {
-    public function __construct($id, array $headers = [], $body = null, $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("GET", "/properties/" . $id . "/services", $headers, $body, $version);
+        parent::__construct("GET", "/properties/" . $id . "/services");
     }
 
     public function getQueryParams()
     {
         return [];
     }
-
 }

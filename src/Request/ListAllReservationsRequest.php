@@ -16,9 +16,9 @@ class ListAllReservationsRequest extends AbstractRequest
     protected $modifiedAtFrom;
     protected $modifiedAtTo;
 
-    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    public function __construct()
     {
-        parent::__construct("GET", "/reservations", $headers, $body, $version);
+        parent::__construct("GET", "/reservations");
     }
 
     public function setStatus($status)
@@ -77,23 +77,22 @@ class ListAllReservationsRequest extends AbstractRequest
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getQueryParams()
     {
         return [
-            'status' => $this->status,
-            'unitsId' => $this->unitsId,
-            'propertiesId' => $this->propertiesId,
-            'bookedAtFrom' => $this->bookedAtFrom,
-            'bookedAtTo' => $this->bookedAtTo,
-            'cancelAtFrom' => $this->cancelAtFrom,
-            'cancelAtTo' => $this->cancelAtTo,
-            'createdAtFrom' => $this->createdAtFrom,
-            'createdAtTo' => $this->createdAtTo,
+            'status'         => $this->status,
+            'unitsId'        => $this->unitsId,
+            'propertiesId'   => $this->propertiesId,
+            'bookedAtFrom'   => $this->bookedAtFrom,
+            'bookedAtTo'     => $this->bookedAtTo,
+            'cancelAtFrom'   => $this->cancelAtFrom,
+            'cancelAtTo'     => $this->cancelAtTo,
+            'createdAtFrom'  => $this->createdAtFrom,
+            'createdAtTo'    => $this->createdAtTo,
             'modifiedAtFrom' => $this->modifiedAtFrom,
-            'modifiedAtTo' => $this->modifiedAtTo
+            'modifiedAtTo'   => $this->modifiedAtTo
         ];
     }
 }
-?>

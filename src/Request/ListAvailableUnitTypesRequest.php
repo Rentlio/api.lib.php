@@ -8,9 +8,9 @@ class ListAvailableUnitTypesRequest extends AbstractRequest
     protected $dateTo;
     protected $rooms;
 
-    public function __construct($id, array $headers = [], $body = null, $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("GET", "/properties/" . $id . "/unit-types/available", $headers, $body, $version);
+        parent::__construct("GET", "/properties/" . $id . "/unit-types/available");
     }
 
     public function setDateFrom($dateFrom)
@@ -35,8 +35,8 @@ class ListAvailableUnitTypesRequest extends AbstractRequest
     {
         return [
             'dateFrom' => $this->dateFrom,
-            'dateTo' => $this->dateTo,
-            'rooms' => $this->rooms
+            'dateTo'   => $this->dateTo,
+            'rooms'    => $this->rooms
         ];
     }
 }

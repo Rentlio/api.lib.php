@@ -2,12 +2,11 @@
 
 namespace Rentlio\Api\Request;
 
-
 class ListAllServicesPaymentTypesRequest extends AbstractRequest
 {
-    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    public function __construct()
     {
-        parent::__construct("GET", "/enums/services/payment-types", $headers, $body, $version);
+        parent::__construct("GET", "/enums/services/payment-types");
     }
 
     public function getQueryParams()

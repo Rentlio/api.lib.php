@@ -7,9 +7,9 @@ class ListUnitTypeRatesRequest extends AbstractRequest
     protected $dateFrom;
     protected $dateTo;
 
-    public function __construct($id, array $headers = [], $body = null, $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("GET", "/unit-types/" . $id . "/rates", $headers, $body, $version);
+        parent::__construct("GET", "/unit-types/" . $id . "/rates");
     }
 
     public function setDateFrom($dateFrom)
@@ -29,8 +29,7 @@ class ListUnitTypeRatesRequest extends AbstractRequest
     {
         return [
             'dateFrom' => $this->dateFrom,
-            'dateTo' => $this->dateTo
+            'dateTo'   => $this->dateTo
         ];
     }
-
 }

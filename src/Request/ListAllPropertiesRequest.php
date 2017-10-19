@@ -6,9 +6,9 @@ class ListAllPropertiesRequest extends AbstractRequest
 {
     protected $name;
 
-    public function __construct(array $headers = [], $body = null, $version = '1.1')
+    public function __construct()
     {
-        parent::__construct("GET", "/properties", $headers, $body, $version);
+        parent::__construct("GET", "/properties");
     }
 
     public function setName($name)

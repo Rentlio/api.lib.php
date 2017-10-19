@@ -8,9 +8,9 @@ class CreateInvoiceItemForReservationRequest extends AbstractRequest
 {
     protected $update;
 
-    public function __construct($id, $body = null, array $headers = [], $version = '1.1')
+    public function __construct($id)
     {
-        parent::__construct("POST", "/reservations/" . $id . "/invoices/items", $headers, $body, $version);
+        parent::__construct("POST", "/reservations/" . $id . "/invoices/items");
 
     }
 
