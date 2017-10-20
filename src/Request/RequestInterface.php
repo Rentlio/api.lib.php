@@ -2,6 +2,12 @@
 
 namespace Rentlio\Api\Request;
 
+/**
+ * Interface RequestInterface
+ * @package Rentlio\Api\Request
+ *
+ * Methods each Rentlio Api request has to implement
+ */
 interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {
     /**
@@ -21,4 +27,14 @@ interface RequestInterface extends \Psr\Http\Message\RequestInterface
      * @return $this
      */
     public function setPage($pageNumber);
+
+    /**
+     * @return array
+     */
+    public function getSortAndPagingParams();
+
+    /**
+     * @return array
+     */
+    public function getQueryParams();
 }
