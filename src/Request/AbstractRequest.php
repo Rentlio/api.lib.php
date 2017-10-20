@@ -39,12 +39,16 @@ abstract class AbstractRequest extends Request implements RequestInterface, \Jso
         $uri                 = parent::getUri();
         $sortAndPagingParams = $this->getSortAndPagingParams();
         foreach ($sortAndPagingParams as $param => $value) {
-            $uri = Uri::withQueryValue($uri, $param, $value);
+            if (!is_null($value)) {
+                $uri = Uri::withQueryValue($uri, $param, $value);
+            }
         }
 
         $queryParams = $this->getQueryParams();
         foreach ($queryParams as $param => $value) {
-            $uri = Uri::withQueryValue($uri, $param, $value);
+            if (!is_null($value)) {
+                $uri = Uri::withQueryValue($uri, $param, $value);
+            }
         }
 
         return $uri;

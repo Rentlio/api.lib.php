@@ -8,7 +8,7 @@ class ListAvailableUnitTypesRequestTest extends PHPUnit_Framework_TestCase
         $uri     = $request->getUri();
 
         $this->assertEquals('/properties/1/unit-types/available', $uri->getPath());
-        $this->assertEquals('order_by=id&order_direction=ASC&page=1&dateFrom&dateTo&rooms', $uri->getQuery());
+        $this->assertEquals('order_by=id&order_direction=ASC&page=1', $uri->getQuery());
     }
 
     public function testRequestSortChangedUri()

@@ -9,9 +9,7 @@ class ListAllReservationsRequestTest extends PHPUnit_Framework_TestCase
         $uri     = $request->getUri();
 
         $this->assertEquals('/reservations', $uri->getPath());
-        $this->assertEquals('order_by=id&order_direction=ASC&page=1&status&unitsId&' .
-            'propertiesId&bookedAtFrom&bookedAtTo&cancelAtFrom&' .
-            'cancelAtTo&createdAtFrom&createdAtTo&modifiedAtFrom&modifiedAtTo', $uri->getQuery());
+        $this->assertEquals('order_by=id&order_direction=ASC&page=1', $uri->getQuery());
     }
 
     public function testRequestSortChangedUri()

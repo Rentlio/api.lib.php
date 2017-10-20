@@ -9,7 +9,7 @@ class ListUnitTypeRatesRequestTest extends PHPUnit_Framework_TestCase
         $uri     = $request->getUri();
 
         $this->assertEquals('/unit-types/1/rates', $uri->getPath());
-        $this->assertEquals('order_by=id&order_direction=ASC&page=1&dateFrom&dateTo', $uri->getQuery());
+        $this->assertEquals('order_by=id&order_direction=ASC&page=1', $uri->getQuery());
     }
 
     public function testRequestSortChangedUri()
