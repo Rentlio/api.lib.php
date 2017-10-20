@@ -9,7 +9,7 @@ class ListUnitTypeAvailabilityRequest extends AbstractRequest
 
     public function __construct($id)
     {
-        parent::__construct("GET", "/properties/" . $id . "/unit-types");
+        parent::__construct("GET", "/unit-types/" . $id . "/availability");
     }
 
     public function setDateFrom($dateFrom)

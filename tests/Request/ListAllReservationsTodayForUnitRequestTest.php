@@ -1,10 +1,10 @@
 <?php
 
-class ListAllReservationsTodayForAUnitRequestTest extends PHPUnit_Framework_TestCase
+class ListAllReservationsTodayForUnitRequestTest extends PHPUnit_Framework_TestCase
 {
     public function testRequestDefaultUri()
     {
-        $request = new \Rentlio\Api\Request\ListAllReservationsTodayForAUnitRequest(2);
+        $request = new \Rentlio\Api\Request\ListAllReservationsTodayForUnitRequest(2);
         $uri     = $request->getUri();
 
         $this->assertEquals('/units/2/reservations/today', $uri->getPath());
@@ -13,7 +13,7 @@ class ListAllReservationsTodayForAUnitRequestTest extends PHPUnit_Framework_Test
 
     public function testRequestSortChangedUri()
     {
-        $request = new \Rentlio\Api\Request\ListAllReservationsTodayForAUnitRequest(1);
+        $request = new \Rentlio\Api\Request\ListAllReservationsTodayForUnitRequest(1);
         $request->setSortOrder('DESC');
         $request->setSortBy('arrivalDate');
         $uri     = $request->getUri();

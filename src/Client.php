@@ -4,7 +4,23 @@ namespace Rentlio\Api;
 
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
+use Rentlio\Api\Request\AbstractRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
+use Rentlio\Api\Request\GetMyDataRequest;
+use Rentlio\Api\Request\ListAllCurrenciesRequest;
+use Rentlio\Api\Request\ListAllPropertiesRequest;
+use Rentlio\Api\Request\ListAllReservationsRequest;
+use Rentlio\Api\Request\ListAllReservationStatusesRequest;
+use Rentlio\Api\Request\ListAllReservationsTodayForUnitRequest;
+use Rentlio\Api\Request\ListAllServicesForPropertyRequest;
+use Rentlio\Api\Request\ListAllServicesPaymentTypesRequest;
+use Rentlio\Api\Request\ListAllUnitsRequest;
+use Rentlio\Api\Request\ListAllUnitTypesRequest;
+use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
+use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
+use Rentlio\Api\Request\ListUnitTypeRatesRequest;
 use Rentlio\Api\Request\RequestInterface;
+use Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest;
 
 class Client
 {
@@ -101,6 +117,9 @@ class Client
     {
         $uri = new Uri($this->baseApiUrl . $request->getUri());
 
+        /**
+         * @var $request AbstractRequest
+         */
         $request = $request
             ->withUri($uri)
             ->withAddedHeader('apiKey', $this->apiKey);
@@ -110,5 +129,194 @@ class Client
         }
 
         return $this->transport->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting user data associated with provided api key
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function getMyData()
+    {
+        $request = new GetMyDataRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all rentl.io currencies enumeration
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllCurrencies()
+    {
+        $request = new ListAllCurrenciesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all properties (hotels) associated with provided api key
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllProperties()
+    {
+        $request = new ListAllPropertiesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all reservations with different filtering options
+     * Since this request can take multiple query params for filtering reservations
+     * complete request should be passed to this method. Filters can be set on request itself
+     *
+     * @param ListAllReservationsRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllReservations(ListAllReservationsRequest $request)
+    {
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all rentl.io reservation statuses enumeration
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllReservationStatuses()
+    {
+        $request = new ListAllReservationStatusesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all checkedIn reservations today in a unit (room)
+     *
+     * @param $unitId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllReservationsTodayForUnit($unitId)
+    {
+        $request = new ListAllReservationsTodayForUnitRequest((int)$unitId);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all services for a property (hotel)
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllServicesForProperty($propertyId)
+    {
+        $request = new ListAllServicesForPropertyRequest($propertyId);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all payment types enumeration
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllServicesPaymentTypes()
+    {
+        $request = new ListAllServicesPaymentTypesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all units for specified propertyId
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllUnits($propertyId)
+    {
+        $request = new ListAllUnitsRequest($propertyId);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all unit types for specified propertyId
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllUnitTypes($propertyId)
+    {
+        $request = new ListAllUnitTypesRequest($propertyId);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all available unit types in date range
+     * for specified propertyId
+     *
+     * @param $propertyId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAvailableUnitTypes($propertyId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListAvailableUnitTypesRequest($propertyId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting availability status for Unit Type in some date range
+     *
+     * @param $unitTypeId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listUnitTypeAvailability($unitTypeId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListUnitTypeAvailabilityRequest($unitTypeId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting rates for Unit Type in some date range
+     *
+     * @param $unitTypeId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listUnitTypeRates($unitTypeId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListUnitTypeRatesRequest($unitTypeId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for adding new invoice item to reservation invoice.
+     * If there are no invoices for this reservation in draft status, new one will be created.
+     *
+     * @param CreateInvoiceItemForReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createInvoiceItem(CreateInvoiceItemForReservationRequest $request)
+    {
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for updating availability, price and minStay restriction
+     * on specific days for specified unit type.
+     *
+     * @param UpdateAvailabilityAndRatesForUnitTypeRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function updateAvailabilityAndRatesForUnitType(UpdateAvailabilityAndRatesForUnitTypeRequest $request)
+    {
+        return $this->send($request);
     }
 }

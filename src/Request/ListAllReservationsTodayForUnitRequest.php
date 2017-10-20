@@ -2,7 +2,7 @@
 
 namespace Rentlio\Api\Request;
 
-class ListAllReservationsTodayForAUnitRequest extends AbstractRequest
+class ListAllReservationsTodayForUnitRequest extends AbstractRequest
 {
     public function __construct($unitId)
     {
