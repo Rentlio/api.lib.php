@@ -38,6 +38,18 @@ $response = $client->send(CreateInvoiceItemForReservationRequest);
 
 ```
 
+### Using client methods
+```php
+use Rentlio\Api\Client;
+
+$client = new Client("put your api key here");
+$response = $client->listAllServicesPaymentTypes();
+
+```
+
+## Dependencies
+Rentlio php api client depends on [guzzleHttp](http://docs.guzzlephp.org/en/stable/) library
+
 ## Contribution
 If you would like to contribute, fix bugs, please fork this repo and create Pull Request when you are done with development.
 All code should fallow PSR and should be tested. 
