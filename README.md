@@ -16,7 +16,6 @@ All client methods will return \Psr\Http\Message\ResponseInterface.
 
 ### Authentication
 ```php
-
     use Rentlio\Api\Client;
     
     $client = new Client("put your api key here");
@@ -25,7 +24,6 @@ All client methods will return \Psr\Http\Message\ResponseInterface.
 
 ### Sending requests
 ```php
-
     use Rentlio\Api\Client;
     use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
     use Rentlio\Api\Request\Data\InvoiceItem;
