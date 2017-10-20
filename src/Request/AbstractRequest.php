@@ -5,7 +5,7 @@ namespace Rentlio\Api\Request;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 
-abstract class AbstractRequest extends Request implements RequestInterface
+abstract class AbstractRequest extends Request implements RequestInterface, \JsonSerializable
 {
     protected $sortBy = "id";
     protected $sortOrder = "ASC";
@@ -57,5 +57,10 @@ abstract class AbstractRequest extends Request implements RequestInterface
             'order_direction' => $this->sortOrder,
             'page'            => $this->page
         ];
+    }
+
+    public function jsonSerialize()
+    {
+        return null;
     }
 }

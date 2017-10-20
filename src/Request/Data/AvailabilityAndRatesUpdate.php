@@ -17,16 +17,19 @@ class AvailabilityAndRatesUpdate implements \JsonSerializable
     public function setAvailability($availability)
     {
         $this->availability = $availability;
+        return $this;
     }
 
     public function setPrice($price)
     {
         $this->price = $price;
+        return $this;
     }
 
     public function setMinStay($minStay)
     {
         $this->minStay = $minStay;
+        return $this;
     }
 
     public function jsonSerialize()

@@ -8,7 +8,7 @@ class CreateInvoiceItemForReservationRequest extends AbstractRequest
 {
     protected $invoiceItem;
 
-    public function __construct($id, InvoiceItem $item)
+    public function __construct($id, InvoiceItem $item = null)
     {
         parent::__construct("POST", "/reservations/" . $id . "/invoices/items");
         $this->invoiceItem = $item;
@@ -17,6 +17,7 @@ class CreateInvoiceItemForReservationRequest extends AbstractRequest
     public function setInvoiceItem(InvoiceItem $item)
     {
         $this->invoiceItem = $item;
+        return $this;
     }
 
     public function getQueryParams()

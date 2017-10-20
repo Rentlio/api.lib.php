@@ -16,6 +16,7 @@ class UpdateAvailabilityAndRatesForUnitTypeRequest extends AbstractRequest
     public function addUpdate(AvailabilityAndRatesUpdate $update)
     {
         $this->updates[] = $update;
+        return $this;
     }
 
     /**

@@ -31,11 +31,13 @@ class InvoiceItem implements \JsonSerializable
     public function setVatIncluded($vatIncluded)
     {
         $this->vatIncluded = $vatIncluded;
+        return $this;
     }
 
     public function setDiscountPercent($discountPercent)
     {
         $this->discountPercent = $discountPercent;
+        return $this;
     }
 
     public function jsonSerialize()
