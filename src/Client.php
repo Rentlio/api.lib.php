@@ -79,6 +79,19 @@ class Client
     }
 
     /**
+     * We allow you to change GuzzleHttp\Client with your own, if you would like to
+     * tweak options of default one.
+     *
+     * @param \GuzzleHttp\Client $transport
+     * @return $this
+     */
+    public function setTransport(\GuzzleHttp\Client $transport)
+    {
+        $this->transport = $transport;
+        return $this;
+    }
+
+    /**
      * Send http request to rentl.io api
      *
      * @param RequestInterface $request
