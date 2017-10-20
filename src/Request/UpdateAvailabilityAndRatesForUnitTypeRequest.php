@@ -2,7 +2,7 @@
 
 namespace Rentlio\Api\Request;
 
-use Rentlio\Api\Model\AvailabilityModel;
+use Rentlio\Api\Request\Data\AvailabilityAndRatesUpdate;
 
 class UpdateAvailabilityAndRatesForUnitTypeRequest extends AbstractRequest
 {
@@ -13,9 +13,9 @@ class UpdateAvailabilityAndRatesForUnitTypeRequest extends AbstractRequest
         parent::__construct("POST", "/unit-types/" . $id . "/availrates");
     }
 
-    public function addUpdate(AvailabilityModel $model)
+    public function addUpdate(AvailabilityAndRatesUpdate $update)
     {
-        $this->updates[] = $model->getArray();
+        $this->updates[] = $update;
     }
 
     /**

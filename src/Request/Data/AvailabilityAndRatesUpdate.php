@@ -1,8 +1,8 @@
 <?php
 
-namespace Rentlio\Api\Model;
+namespace Rentlio\Api\Request\Data;
 
-class AvailabilityModel
+class AvailabilityAndRatesUpdate implements \JsonSerializable
 {
     protected $date;
     protected $availability;
@@ -29,15 +29,17 @@ class AvailabilityModel
         $this->minStay = $minStay;
     }
 
-    public function getArray()
+    public function jsonSerialize()
     {
-        $data = array(
-            'date' => $this->date,
+        $data = [
+            'date'         => $this->date,
             'availability' => $this->availability,
-            'price' => $this->price,
-            'minStay' => $this->minStay
-        );
-        $data = array_filter($data, function($var){ return $var !== null;});
+            'price'        => $this->price,
+            'minStay'      => $this->minStay
+        ];
+        $data = array_filter($data, function ($var) {
+            return $var !== null;
+        });
         return $data;
     }
 }

@@ -2,21 +2,21 @@
 
 namespace Rentlio\Api\Request;
 
-use Rentlio\Api\Model\InvoiceModel;
+use Rentlio\Api\Request\Data\InvoiceItem;
 
 class CreateInvoiceItemForReservationRequest extends AbstractRequest
 {
-    protected $update;
+    protected $invoiceItem;
 
-    public function __construct($id)
+    public function __construct($id, InvoiceItem $item)
     {
         parent::__construct("POST", "/reservations/" . $id . "/invoices/items");
-
+        $this->invoiceItem = $item;
     }
 
-    public function addUpdate(InvoiceModel $model)
+    public function setInvoiceItem(InvoiceItem $item)
     {
-        $this->update = $model->getArray();
+        $this->invoiceItem = $item;
     }
 
     public function getQueryParams()
@@ -31,6 +31,6 @@ class CreateInvoiceItemForReservationRequest extends AbstractRequest
 
     public function jsonSerialize()
     {
-        return $this->update;
+        return $this->invoiceItem;
     }
 }
