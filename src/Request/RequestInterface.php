@@ -2,6 +2,12 @@
 
 namespace Rentlio\Api\Request;
 
+/**
+ * Interface RequestInterface
+ * @package Rentlio\Api\Request
+ *
+ * Methods each Rentlio Api request has to implement
+ */
 interface RequestInterface extends \Psr\Http\Message\RequestInterface
 {
     /**

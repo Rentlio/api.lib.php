@@ -22,6 +22,15 @@ use Rentlio\Api\Request\ListUnitTypeRatesRequest;
 use Rentlio\Api\Request\RequestInterface;
 use Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest;
 
+/**
+ * Class Client
+ * @package Rentlio\Api
+ *
+ * Client for public rentl.io api.
+ * Api docs can be found @ https://docs.rentl.io
+ *
+ * Instructions on usage can be found inside README.md and unit tests.
+ */
 class Client
 {
     /**

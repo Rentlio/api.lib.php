@@ -2,6 +2,12 @@
 
 namespace Rentlio\Api\Request;
 
+/**
+ * Class GetMyDataRequest
+ * @package Rentlio\Api\Request
+ *
+ * GET Request for getting user data for user associated with given apiKey
+ */
 class GetMyDataRequest extends AbstractRequest
 {
     public function __construct()

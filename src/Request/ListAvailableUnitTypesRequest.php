@@ -2,10 +2,28 @@
 
 namespace Rentlio\Api\Request;
 
+/**
+ * Class ListAvailableUnitTypesRequest
+ * @package Rentlio\Api\Request
+ *
+ * GET Request for listing all available unit types in some date range for
+ * specified property (hotel)
+ */
 class ListAvailableUnitTypesRequest extends AbstractRequest
 {
+    /**
+     * @var string ISO 8601 Date format
+     */
     protected $dateFrom;
+
+    /**
+     * @var string ISO 8601 Date format
+     */
     protected $dateTo;
+
+    /**
+     * @var int Minimum number of rooms that should be available to list this unit type.
+     */
     protected $rooms;
 
     public function __construct($id)
