@@ -32,7 +32,7 @@ abstract class AbstractRequest extends Request implements RequestInterface, \Jso
     /**
      * This method takes all query params from request and appends them to url
      *
-     * @return \Psr\Http\Message\UriInterface|UriInterface
+     * @return \Psr\Http\Message\UriInterface
      */
     public function getUri()
     {
