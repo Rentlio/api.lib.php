@@ -14,10 +14,12 @@ class ListAllPropertiesRequestTest extends PHPUnit_Framework_TestCase
     public function testRequestSortChangedUri()
     {
         $request = new \Rentlio\Api\Request\ListAllPropertiesRequest();
-        $request->setName('Moji Apartmani');
-        $request->setSortOrder('DESC');
-        $request->setSortBy('name');
-        $uri     = $request->getUri();
+
+        $request->setName('Moji Apartmani')
+            ->setSortOrder('DESC')
+            ->setSortBy('name');
+
+        $uri = $request->getUri();
 
         $this->assertEquals('/properties', $uri->getPath());
         $this->assertEquals('order_by=name&order_direction=DESC&page=1&name=Moji%20Apartmani', $uri->getQuery());

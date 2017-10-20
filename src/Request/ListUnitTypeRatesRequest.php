@@ -15,11 +15,13 @@ class ListUnitTypeRatesRequest extends AbstractRequest
     public function setDateFrom($dateFrom)
     {
         $this->dateFrom = $dateFrom;
+        return $this;
     }
 
     public function setDateTo($dateTo)
     {
         $this->dateTo = $dateTo;
+        return $this;
     }
 
     /**

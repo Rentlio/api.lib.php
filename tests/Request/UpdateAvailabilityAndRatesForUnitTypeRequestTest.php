@@ -14,13 +14,13 @@ class UpdateAvailabilityAndRatesForUnitTypeRequestTest extends PHPUnit_Framework
     public function testRequestSortChangedUri()
     {
         $request = new \Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest(1);
-        $request->setSortOrder('DESC');
-        $request->setSortBy('name');
+        $request
+            ->setSortOrder('DESC')
+            ->setSortBy('name');
         $uri = $request->getUri();
 
         $this->assertEquals('/unit-types/1/availrates', $uri->getPath());
-        $this->assertEquals('',
-            $uri->getQuery());
+        $this->assertEquals('', $uri->getQuery());
     }
 
     public function testJsonSerialize()

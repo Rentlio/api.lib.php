@@ -14,9 +14,10 @@ class ListAllReservationsTodayForUnitRequestTest extends PHPUnit_Framework_TestC
     public function testRequestSortChangedUri()
     {
         $request = new \Rentlio\Api\Request\ListAllReservationsTodayForUnitRequest(1);
-        $request->setSortOrder('DESC');
-        $request->setSortBy('arrivalDate');
-        $uri     = $request->getUri();
+        $request
+            ->setSortOrder('DESC')
+            ->setSortBy('arrivalDate');
+        $uri = $request->getUri();
 
         $this->assertEquals('/units/1/reservations/today', $uri->getPath());
         $this->assertEquals('order_by=arrivalDate&order_direction=DESC&page=1', $uri->getQuery());

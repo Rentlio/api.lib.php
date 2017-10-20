@@ -15,9 +15,10 @@ class ListAllCurrenciesRequestTest extends PHPUnit_Framework_TestCase
     public function testRequestSortChangedUri()
     {
         $request = new \Rentlio\Api\Request\ListAllCurrenciesRequest();
-        $request->setSortOrder('DESC');
-        $request->setSortBy('name');
-        $uri     = $request->getUri();
+        $request
+            ->setSortOrder('DESC')
+            ->setSortBy('name');
+        $uri = $request->getUri();
 
         $this->assertEquals('/enums/currencies', $uri->getPath());
         $this->assertEquals('order_by=name&order_direction=DESC&page=1', $uri->getQuery());

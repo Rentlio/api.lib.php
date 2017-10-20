@@ -14,19 +14,20 @@ class CreateInvoiceItemForReservationRequestTest extends PHPUnit_Framework_TestC
     public function testRequestSortChangedUri()
     {
         $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(1);
-        $request->setSortOrder('DESC');
-        $request->setSortBy('name');
+        $request
+            ->setSortOrder('DESC')
+            ->setSortBy('name');
+
         $uri = $request->getUri();
 
         $this->assertEquals('/reservations/1/invoices/items', $uri->getPath());
-        $this->assertEquals('',
-            $uri->getQuery());
+        $this->assertEquals('', $uri->getQuery());
     }
 
     public function testJsonSerialize()
     {
         $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(1);
-        $item  = new \Rentlio\Api\Request\Data\InvoiceItem("Cola", 123.33, 0.5);
+        $item    = new \Rentlio\Api\Request\Data\InvoiceItem("Cola", 123.33, 0.5);
 
         $request->setInvoiceItem($item);
 
