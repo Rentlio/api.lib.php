@@ -29,12 +29,13 @@ use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\Data\InvoiceItem;
 
 $client = new Client("put your api key here");
-$request = new CreateInvoiceItemForReservationRequest(45);
+
+$request     = new CreateInvoiceItemForReservationRequest(45);
 $invoiceItem = new InvoiceItem("cola", 13.99, 0.5);
 $invoiceItem->addPDVTax(13);
 $request->setInvoiceItem($invoiceItem);
 
-$response = $client->send(CreateInvoiceItemForReservationRequest);
+$response = $client->send($request);
 
 ```
 
@@ -42,9 +43,10 @@ $response = $client->send(CreateInvoiceItemForReservationRequest);
 ```php
 use Rentlio\Api\Client;
 
-$client = new Client("put your api key here");
+$client   = new Client("put your api key here");
 $response = $client->listAllServicesPaymentTypes();
 
+echo $response->getBody()->getContents();
 ```
 
 ## Dependencies
