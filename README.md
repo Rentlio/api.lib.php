@@ -3,6 +3,10 @@ Rentl.io Public Api PHP Client lib
 
 This library is official PHP rentl.io api client. Api documentation can be found [here](https://docs.rentl.io)
 
+## Rentlio 
+
+Rentlio is a cloud-based app tailor-made for vacation rentals owners, hostels and small hotels. Channel manager synchronization with Booking.com, Expedia, AirBnB and many others, lightspeed check-in with real-time ID cards & passport scanning feature, invoicing, statistics, guest profiles... Save time on administration, get rid of errors and stress.
+Focus more on sales and planning. Focus more on your guests.
 
 ## USAGE
 To be able to use this lib, or rentlio api in general you first need to generate apiKey.
@@ -54,7 +58,7 @@ Rentlio php api client depends on [guzzleHttp](http://docs.guzzlephp.org/en/stab
 
 ## Contribution
 If you would like to contribute, fix bugs, please fork this repo and create Pull Request when you are done with development.
-All code should fallow PSR and should be tested. 
+All code should follow PSR and should be tested.
 
 ## License
 Mit
