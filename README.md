@@ -1,6 +1,8 @@
 Rentl.io Public Api PHP Client lib
 ==================================
 
+[![CircleCI](https://circleci.com/gh/Rentlio/api.lib.php/tree/master.svg?style=svg)](https://circleci.com/gh/Rentlio/api.lib.php/tree/master)
+
 This library is official PHP rentl.io api client. Api documentation can be found [here](https://docs.rentl.io)
 
 ## Rentlio 
