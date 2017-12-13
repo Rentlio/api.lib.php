@@ -7,13 +7,18 @@ use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
+use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
+use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
 use Rentlio\Api\Request\ListAllCurrenciesRequest;
+use Rentlio\Api\Request\ListAllDocumentTypesRequest;
 use Rentlio\Api\Request\ListAllPropertiesRequest;
+use Rentlio\Api\Request\ListAllProvidedServiceTypesRequest;
 use Rentlio\Api\Request\ListAllReservationsRequest;
 use Rentlio\Api\Request\ListAllReservationStatusesRequest;
 use Rentlio\Api\Request\ListAllReservationsTodayForUnitRequest;
 use Rentlio\Api\Request\ListAllServicesForPropertyRequest;
 use Rentlio\Api\Request\ListAllServicesPaymentTypesRequest;
+use Rentlio\Api\Request\ListAllTouristTaxCategoriesRequest;
 use Rentlio\Api\Request\ListAllUnitsRequest;
 use Rentlio\Api\Request\ListAllUnitTypesRequest;
 use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
@@ -328,4 +333,66 @@ class Client
     {
         return $this->send($request);
     }
+
+    /**
+     * Calls api endpoint for getting all rentl.io document types enumeration used for a guest
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllDocumentTypes()
+    {
+        $request = new ListAllDocumentTypesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all rentl.io arrival arrangements enumeration used for a guest
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllArrivalArrangements()
+    {
+        $request = new ListAllArrivalArrangementsRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all rentl.io tourist tax categories enumeration used for a guest
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllTouristTaxCategories()
+    {
+        $request = new ListAllTouristTaxCategoriesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all rentl.io provided service types enumeration used for a guest
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllProvidedServiceTypes()
+    {
+        $request = new ListAllProvidedServiceTypesRequest();
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all reservations in date range
+     * for specified propertyId where reservation holders that are checked-in in some date range
+     *
+     * @param $propertyId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listAllCheckedInGuests($propertyId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListAllCheckedInGuestsRequest($propertyId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
 }
