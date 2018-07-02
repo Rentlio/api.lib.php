@@ -9,7 +9,7 @@ use Rentlio\Api\Request\Data\Reservation;
  * @package Rentlio\Api\Request
  *
  * POST Request for creating new reservation.
- * https://docs.rentl.io/#invoices-create-invoice-item-for-reservation
+ * https://docs.rentl.io/#reservations-create-new-reservation
  */
 class CreateNewReservationRequest extends AbstractRequest
 {
