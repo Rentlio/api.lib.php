@@ -8,7 +8,7 @@ class ListGuestsForReservationRequestTest extends PHPUnit_Framework_TestCase
         $request = new \Rentlio\Api\Request\ListGuestsForReservationRequest(1);
         $uri     = $request->getUri();
 
-        $this->assertEquals('/properties/1/units', $uri->getPath());
+        $this->assertEquals('/reservations/1/guests', $uri->getPath());
         $this->assertEquals('order_by=id&order_direction=ASC&page=1', $uri->getQuery());
     }
 
@@ -20,7 +20,7 @@ class ListGuestsForReservationRequestTest extends PHPUnit_Framework_TestCase
             ->setSortBy('name');
         $uri = $request->getUri();
 
-        $this->assertEquals('/properties/1/units', $uri->getPath());
+        $this->assertEquals('/reservations/1/guests', $uri->getPath());
         $this->assertEquals('order_by=name&order_direction=DESC&page=1', $uri->getQuery());
     }
 
