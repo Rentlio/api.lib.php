@@ -9,7 +9,7 @@ namespace Rentlio\Api\Request;
  * GET Request for listing invoices associated with property
  * https://docs.rentl.io/#invoices-get-invoices-by-property
  */
-class GetInvoicesByProperty extends AbstractRequest
+class GetInvoicesByPropertyRequest extends AbstractRequest
 {
     public function __construct($id)
     {

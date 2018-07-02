@@ -5,7 +5,7 @@ class GetInvoicesByPropertyTest extends PHPUnit_Framework_TestCase
 {
     public function testRequestDefaultUri()
     {
-        $request = new \Rentlio\Api\Request\GetInvoicesByProperty(1);
+        $request = new \Rentlio\Api\Request\GetInvoicesByPropertyRequest(1);
         $uri     = $request->getUri();
 
         $this->assertEquals('/properties/1/invoices', $uri->getPath());
@@ -14,7 +14,7 @@ class GetInvoicesByPropertyTest extends PHPUnit_Framework_TestCase
 
     public function testRequestSortChangedUri()
     {
-        $request = new \Rentlio\Api\Request\GetInvoicesByProperty(1);
+        $request = new \Rentlio\Api\Request\GetInvoicesByPropertyRequest(1);
         $request
             ->setSortOrder('DESC')
             ->setSortBy('name');
