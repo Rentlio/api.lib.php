@@ -3,7 +3,7 @@
 namespace Rentlio\Api\Request;
 
 /**
- * Class ListUnitTypeRatesRequest
+ * Class ListUnitTypeRestrictionsRequest
  * @package Rentlio\Api\Request
  *
  * GET Request for listing all unit type restrictions in some date range
