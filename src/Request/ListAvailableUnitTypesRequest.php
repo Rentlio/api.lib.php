@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all available unit types in some date range for
  * specified property (hotel)
+ * https://docs.rentl.io/#unit-types-list-available-unit-types
  */
 class ListAvailableUnitTypesRequest extends AbstractRequest
 {

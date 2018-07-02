@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all currencies used in rentl.io
  * This is enumeration, that can be used inside other api calls, when needed.
+ * https://docs.rentl.io/#enums-list-all-currencies
  */
 class ListAllCurrenciesRequest extends AbstractRequest
 {

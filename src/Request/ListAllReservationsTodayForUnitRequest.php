@@ -9,6 +9,7 @@ namespace Rentlio\Api\Request;
  * GET Request for listing all checkedIn reservations today in some unit
  * Usually only one reservations should be returned. If there are more, this means you have
  * overbooking or you didn't checkout previous guest.
+ * https://docs.rentl.io/#reservations-list-all-reservations-today-for-a-unit
  */
 class ListAllReservationsTodayForUnitRequest extends AbstractRequest
 {

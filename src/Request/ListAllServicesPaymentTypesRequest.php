@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all payment types inside rentl.io
  * This is enumeration, that can be used inside other api calls, when needed.
+ * https://docs.rentl.io/#enums-list-all-services-payment-types
  */
 class ListAllServicesPaymentTypesRequest extends AbstractRequest
 {
