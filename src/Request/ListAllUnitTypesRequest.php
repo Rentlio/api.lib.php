@@ -7,6 +7,7 @@ namespace Rentlio\Api\Request;
  * @package Rentlio\Api\Request
  *
  * GET Request for listing all unit types (rooms types) for specific property (hotel)
+ * https://docs.rentl.io/#unit-types-list-all-unit-types
  */
 class ListAllUnitTypesRequest extends AbstractRequest
 {

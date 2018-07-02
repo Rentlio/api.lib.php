@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all reservations. There are many query params that can
  * be used with this endpoint to filter this reservations out.
+ * https://docs.rentl.io/#reservations-list-all-reservations
  */
 class ListAllReservationsRequest extends AbstractRequest
 {

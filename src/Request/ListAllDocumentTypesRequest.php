@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all document types an guest can be checked used in rentl.io
  * This is enumeration, that can be used inside other api calls, when needed.
+ * https://docs.rentl.io/#enums-list-all-document-types
  */
 class ListAllDocumentTypesRequest extends AbstractRequest
 {

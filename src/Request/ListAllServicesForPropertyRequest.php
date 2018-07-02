@@ -7,6 +7,7 @@ namespace Rentlio\Api\Request;
  * @package Rentlio\Api\Request
  *
  * GET Request for listing all services for a property (hotel)
+ * https://docs.rentl.io/#services-list-all-services-for-property
  */
 class ListAllServicesForPropertyRequest extends AbstractRequest
 {

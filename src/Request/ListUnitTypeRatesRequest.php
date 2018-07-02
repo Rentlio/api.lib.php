@@ -7,6 +7,7 @@ namespace Rentlio\Api\Request;
  * @package Rentlio\Api\Request
  *
  * GET Request for listing all unit type rates in some date range
+ * https://docs.rentl.io/#unit-types-list-unit-type-rates
  */
 class ListUnitTypeRatesRequest extends AbstractRequest
 {

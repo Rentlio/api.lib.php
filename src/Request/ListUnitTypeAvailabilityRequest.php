@@ -7,6 +7,7 @@ namespace Rentlio\Api\Request;
  * @package Rentlio\Api\Request
  *
  * GET Request for listing availability status for unit type on some date range
+ * https://docs.rentl.io/#unit-types-list-unit-type-availability
  */
 class ListUnitTypeAvailabilityRequest extends AbstractRequest
 {
