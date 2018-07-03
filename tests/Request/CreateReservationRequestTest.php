@@ -17,12 +17,12 @@ class CreateReservationRequestTest extends PHPUnit_Framework_TestCase
         $requestBody = json_encode($request);
         $this->assertJson($requestBody);
 
-        $reservation = new \Rentlio\Api\Request\Data\Reservation(1, '1530537657', '1530537659', 1, 2);
+        $reservation = new \Rentlio\Api\Request\Data\Reservation(1, '2018-07-23', '2018-07-25', 1, 2);
         $request->setReservation($reservation);
 
         $requestBody = json_encode($request);
         $this->assertJson($requestBody);
-        $this->assertEquals('{"unitTypeId":1,"dateFrom":"1530537657","dateTo":"1530537659","persons":2,"rooms":1}', $requestBody);
+        $this->assertEquals('{"unitTypeId":1,"dateFrom":"2018-07-23","dateTo":"2018-07-25","persons":2,"rooms":1}', $requestBody);
 
         $reservation->setEmail('doe@rentl.io');
         $reservation->setNote('Testing request');
@@ -35,6 +35,6 @@ class CreateReservationRequestTest extends PHPUnit_Framework_TestCase
 
         $requestBody = json_encode($request);
         $this->assertJson($requestBody);
-        $this->assertEquals('{"unitTypeId":1,"dateFrom":"1530537657","dateTo":"1530537659","email":"doe@rentl.io","persons":3,"rooms":2,"note":"Testing request","cardHolder":"John Doe","cardNumber":"0987654321","expiryMonth":8,"expiryYear":2022}', $requestBody);
+        $this->assertEquals('{"unitTypeId":1,"dateFrom":"2018-07-23","dateTo":"2018-07-25","email":"doe@rentl.io","persons":3,"rooms":2,"note":"Testing request","cardHolder":"John Doe","cardNumber":"0987654321","expiryMonth":8,"expiryYear":2022}', $requestBody);
     }
 }
