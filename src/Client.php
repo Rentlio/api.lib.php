@@ -5,7 +5,10 @@ namespace Rentlio\Api;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
+use Rentlio\Api\Request\CheckInRequest;
+use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
+use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
 use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
@@ -394,5 +397,46 @@ class Client
         $request->setDateTo($dateTo->format('Y-m-d'));
         return $this->send($request);
     }
+
+
+
+    /**
+     * Calls api endpoint for making check-in of the reservation
+     *
+     * @param integer $reservationsId
+     * @param boolean $checkIn
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function checkInReservation($reservationsId, $checkIn)
+    {
+        $request = new CheckInRequest($reservationsId, $checkIn);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for making check-out of the reservation
+     *
+     * @param integer $reservationsId
+     * @param boolean $checkOut
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function checkOutReservation($reservationsId, $checkOut)
+    {
+        $request = new CheckOutRequest($reservationsId, $checkOut);
+        return $this->send($request);
+    }
+    
+    /**
+     * Calls api endpoint for creating new reservation in Rentlio.
+     *
+     * @param CreateNewReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createReservation(CreateNewReservationRequest $request)
+    {
+        return $this->send($request);
+    }
+
+
 
 }
