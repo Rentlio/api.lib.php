@@ -10,6 +10,7 @@ use Rentlio\Api\Request\Data\AvailabilityAndRatesUpdate;
  *
  * POST Request for updating availability, prices and minStay
  * for some unit type on specific dates.
+ * https://docs.rentl.io/#unit-types-update-availability-and-rates-for-unit-type
  */
 class UpdateAvailabilityAndRatesForUnitTypeRequest extends AbstractRequest
 {

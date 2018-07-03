@@ -6,6 +6,7 @@ namespace Rentlio\Api\Request;
  * Class ListAllCheckedInGuestsRequest
  * @package Rentlio\Api\Request
  * GET Request for listing reservations with reservation holders that are checked-In at property in some date range
+ * https://docs.rentl.io/#guests-list-all-checked-in-guests
  */
 class ListAllCheckedInGuestsRequest extends AbstractRequest
 {

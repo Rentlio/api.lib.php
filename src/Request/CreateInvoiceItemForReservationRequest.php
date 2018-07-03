@@ -10,6 +10,7 @@ use Rentlio\Api\Request\Data\InvoiceItem;
  *
  * POST Request for adding new invoice item to reservation invoice.
  * If there are no invoices for this reservation in draft status, new invoice will be created.
+ * https://docs.rentl.io/#invoices-create-invoice-item-for-reservation
  */
 class CreateInvoiceItemForReservationRequest extends AbstractRequest
 {

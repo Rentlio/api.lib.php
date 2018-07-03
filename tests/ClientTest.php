@@ -302,6 +302,26 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($request->getBody()->getContents());
     }
 
+    public function testListUnitTypeRestrictions()
+    {
+        $dateFrom = DateTime::createFromFormat('d.m.Y', '01.09.2018');
+        $dateTo   = DateTime::createFromFormat('d.m.Y', '31.10.2018');
+        $this->client->listUnitTypeRestrictions(7654, $dateFrom, $dateTo);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/unit-types/7654/restrictions?order_by=id&order_direction=ASC&page=1&dateFrom=2018-09-01&dateTo=2018-10-31',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
     public function testCreateInvoiceItem()
     {
         $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(123);
@@ -355,6 +375,178 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             '{"days":[{"date":"2016-05-01","price":123.33},{"date":"2016-05-02","availability":3}]}',
+            $request->getBody()->getContents()
+        );
+    }
+
+    public function testListGuestsForReservation()
+    {
+        $this->client->listGuestsForReservation(1);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/guests',
+            (string)$request->getUri()
+        );
+
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
+    public function testGetInvoicesByProperty()
+    {
+        $this->client->getInvoicesByProperty(365);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/properties/365/invoices?order_by=id&order_direction=ASC&page=1',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
+    public function testGetInvoiceDetails()
+    {
+        $this->client->getInvoiceDetails(365);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/invoices/365',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
+
+    public function testGetInvoicesByReservation()
+    {
+        $this->client->getInvoicesByReservation(365);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/365/invoices?order_by=id&order_direction=ASC&page=1',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
+
+    public function testCreateInvoiceItemsBulk()
+    {
+        $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest(123);
+
+        $itemCola = new \Rentlio\Api\Request\Data\InvoiceItem("cola", 123.33, 0.5);
+        $itemCola->addPDVTax(13);
+
+        $itemBurger = new \Rentlio\Api\Request\Data\InvoiceItem("Angus Burger", 79.80, 1);
+        $itemBurger->addPDVTax(13);
+
+        $request->setInvoiceItems([$itemCola, $itemBurger]);
+
+        $this->client->createInvoiceItems($request);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/123/invoices/items/bulk',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '[{"description":"cola","price":123.33,"quantity":0.5,"taxes":[{"label":"PDV","rate":13}]},{"description":"Angus Burger","price":79.8,"quantity":1,"taxes":[{"label":"PDV","rate":13}]}]',
+            $request->getBody()->getContents()
+        );
+    }
+
+    public function testCheckInRequest()
+    {
+        $this->client->checkInReservation(1, true);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('PUT', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/checkin',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '{"checkIn":true}',
+            $request->getBody()->getContents()
+        );
+    }
+
+    public function testCheckOutRequest()
+    {
+        $this->client->checkOutReservation(1, true);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('PUT', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/checkout',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '{"checkOut":true}',
+            $request->getBody()->getContents()
+        );
+    }
+
+    public function testCreateNewReservation()
+    {
+        $reservation = new Rentlio\Api\Request\Data\Reservation(123, '2018-07-23', '2018-07-25', 1, 2);
+        $reservation->setEmail('developer@rentl.io');
+        $reservation->setFullName('Backend Developer');
+        $reservation->setNote('Test note');
+        $request = new \Rentlio\Api\Request\CreateNewReservationRequest($reservation);
+        $this->client->createReservation($request);
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+        $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '{"unitTypeId":123,"dateFrom":"2018-07-23","dateTo":"2018-07-25","email":"developer@rentl.io","fullName":"Backend Developer","persons":2,"rooms":1,"note":"Test note"}',
             $request->getBody()->getContents()
         );
     }

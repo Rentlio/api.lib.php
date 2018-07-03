@@ -8,6 +8,7 @@ namespace Rentlio\Api\Request;
  *
  * GET Request for listing all properties (hotels) for user that is
  * associated with given apiKey
+ * https://docs.rentl.io/#properties-list-all-properties
  */
 class ListAllPropertiesRequest extends AbstractRequest
 {
