@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
 use Rentlio\Api\Request\CheckInRequest;
+use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
@@ -397,6 +398,8 @@ class Client
         return $this->send($request);
     }
 
+
+
     /**
      * Calls api endpoint for making check-in of the reservation
      *
@@ -407,6 +410,19 @@ class Client
     public function checkInReservation($reservationsId, $checkIn)
     {
         $request = new CheckInRequest($reservationsId, $checkIn);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for making check-out of the reservation
+     *
+     * @param integer $reservationsId
+     * @param boolean $checkOut
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function checkOutReservation($reservationsId, $checkOut)
+    {
+        $request = new CheckOutRequest($reservationsId, $checkOut);
         return $this->send($request);
     }
     
@@ -420,5 +436,7 @@ class Client
     {
         return $this->send($request);
     }
+
+
 
 }
