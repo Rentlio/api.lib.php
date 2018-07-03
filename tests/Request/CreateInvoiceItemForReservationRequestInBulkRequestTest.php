@@ -13,19 +13,6 @@ class CreateInvoiceItemForReservationRequestInBulkRequestTest extends PHPUnit_Fr
         $this->assertEquals('', $uri->getQuery());
     }
 
-    public function testRequestSortChangedUri()
-    {
-        $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest(1);
-        $request
-            ->setSortOrder('DESC')
-            ->setSortBy('name');
-
-        $uri = $request->getUri();
-
-        $this->assertEquals('/reservations/1/invoices/items/bulk', $uri->getPath());
-        $this->assertEquals('', $uri->getQuery());
-    }
-
     public function testJsonSerialize()
     {
         $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest(1);
