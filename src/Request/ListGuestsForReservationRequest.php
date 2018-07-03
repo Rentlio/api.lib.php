@@ -24,4 +24,12 @@ class ListGuestsForReservationRequest extends AbstractRequest
     {
         return [];
     }
+
+    /**
+     * @return array
+     */
+    public function getSortAndPagingParams()
+    {
+        return [];
+    }
 }
