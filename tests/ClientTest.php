@@ -379,4 +379,29 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $request->getBody()->getContents()
         );
     }
+  
+    public function testCreateNewReservation()
+    {
+        $reservation = new Rentlio\Api\Request\Data\Reservation(123, '2018-07-23', '2018-07-25', 1, 2);
+        $reservation->setEmail('developer@rentl.io');
+        $reservation->setFullName('Backend Developer');
+        $reservation->setNote('Test note');
+        $request = new \Rentlio\Api\Request\CreateNewReservationRequest($reservation);
+        $this->client->createReservation($request);
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+        $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '{"unitTypeId":123,"dateFrom":"2018-07-23","dateTo":"2018-07-25","email":"developer@rentl.io","fullName":"Backend Developer","persons":2,"rooms":1,"note":"Test note"}',
+            $request->getBody()->getContents()
+        );
+    }
+  
 }

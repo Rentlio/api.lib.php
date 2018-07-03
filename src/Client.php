@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
 use Rentlio\Api\Request\CheckInRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
-use Rentlio\Api\Request\Data\CheckIn;
+use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
 use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
@@ -407,6 +407,17 @@ class Client
     public function checkInReservation($reservationsId, $checkIn)
     {
         $request = new CheckInRequest($reservationsId, $checkIn);
+        return $this->send($request);
+    }
+    
+    /**
+     * Calls api endpoint for creating new reservation in Rentlio.
+     *
+     * @param CreateNewReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createReservation(CreateNewReservationRequest $request)
+    {
         return $this->send($request);
     }
 
