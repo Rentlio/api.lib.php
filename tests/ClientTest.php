@@ -359,6 +359,25 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testListGuestsForReservation()
+    {
+        $this->client->listGuestsForReservation(1);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/guests',
+            (string)$request->getUri()
+        );
+
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
     public function testCheckInRequest()
     {
         $this->client->checkInReservation(1, true);
@@ -400,7 +419,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $request->getBody()->getContents()
         );
     }
-  
+
     public function testCreateNewReservation()
     {
         $reservation = new Rentlio\Api\Request\Data\Reservation(123, '2018-07-23', '2018-07-25', 1, 2);
