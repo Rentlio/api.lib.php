@@ -5,9 +5,9 @@ namespace Rentlio\Api;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
-use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CheckInRequest;
 use Rentlio\Api\Request\CheckOutRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetInvoiceDetailsRequest;
@@ -30,6 +30,7 @@ use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
 use Rentlio\Api\Request\ListGuestsForReservationRequest;
 use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
 use Rentlio\Api\Request\ListUnitTypeRatesRequest;
+use Rentlio\Api\Request\ListUnitTypeRestrictionsRequest;
 use Rentlio\Api\Request\RequestInterface;
 use Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest;
 
@@ -311,6 +312,22 @@ class Client
     public function listUnitTypeRates($unitTypeId, \DateTime $dateFrom, \DateTime $dateTo)
     {
         $request = new ListUnitTypeRatesRequest($unitTypeId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting restrictions for Unit Type in some date range
+     *
+     * @param $unitTypeId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listUnitTypeRestrictions($unitTypeId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListUnitTypeRestrictionsRequest($unitTypeId);
         $request->setDateFrom($dateFrom->format('Y-m-d'));
         $request->setDateTo($dateTo->format('Y-m-d'));
         return $this->send($request);
