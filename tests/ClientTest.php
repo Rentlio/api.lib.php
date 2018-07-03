@@ -302,6 +302,26 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($request->getBody()->getContents());
     }
 
+    public function testListUnitTypeRestrictions()
+    {
+        $dateFrom = DateTime::createFromFormat('d.m.Y', '01.09.2018');
+        $dateTo   = DateTime::createFromFormat('d.m.Y', '31.10.2018');
+        $this->client->listUnitTypeRestrictions(7654, $dateFrom, $dateTo);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/unit-types/7654/restrictions?order_by=id&order_direction=ASC&page=1&dateFrom=2018-09-01&dateTo=2018-10-31',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
+
     public function testCreateInvoiceItem()
     {
         $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationRequest(123);
@@ -357,6 +377,25 @@ class ClientTest extends PHPUnit_Framework_TestCase
             '{"days":[{"date":"2016-05-01","price":123.33},{"date":"2016-05-02","availability":3}]}',
             $request->getBody()->getContents()
         );
+    }
+
+    public function testListGuestsForReservation()
+    {
+        $this->client->listGuestsForReservation(1);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/guests',
+            (string)$request->getUri()
+        );
+
+        $this->assertEmpty($request->getBody()->getContents());
     }
 
 

@@ -28,8 +28,10 @@ use Rentlio\Api\Request\ListAllTouristTaxCategoriesRequest;
 use Rentlio\Api\Request\ListAllUnitsRequest;
 use Rentlio\Api\Request\ListAllUnitTypesRequest;
 use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
+use Rentlio\Api\Request\ListGuestsForReservationRequest;
 use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
 use Rentlio\Api\Request\ListUnitTypeRatesRequest;
+use Rentlio\Api\Request\ListUnitTypeRestrictionsRequest;
 use Rentlio\Api\Request\RequestInterface;
 use Rentlio\Api\Request\UpdateAvailabilityAndRatesForUnitTypeRequest;
 
@@ -317,6 +319,22 @@ class Client
     }
 
     /**
+     * Calls api endpoint for getting restrictions for Unit Type in some date range
+     *
+     * @param $unitTypeId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateTo
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listUnitTypeRestrictions($unitTypeId, \DateTime $dateFrom, \DateTime $dateTo)
+    {
+        $request = new ListUnitTypeRestrictionsRequest($unitTypeId);
+        $request->setDateFrom($dateFrom->format('Y-m-d'));
+        $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
      * Calls api endpoint for listing invoices attached to specific reservation.
      *
      * @param  $reservationsId
@@ -437,6 +455,18 @@ class Client
         return $this->send($request);
     }
 
+    /**
+     * Calls api endpoint for getting all reservations in date range
+     * for specified propertyId where reservation holders that are checked-in in some date range
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listGuestsForReservation($reservationsId)
+    {
+        $request = new ListGuestsForReservationRequest($reservationsId);
+        return $this->send($request);
+    }
 
 
     /**
