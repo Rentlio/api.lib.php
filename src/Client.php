@@ -5,7 +5,12 @@ namespace Rentlio\Api;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
+use Rentlio\Api\Request\CheckInRequest;
+use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
+use Rentlio\Api\Request\CreateNewReservationRequest;
+use Rentlio\Api\Request\GetInvoiceDetailsRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
 use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
@@ -22,6 +27,7 @@ use Rentlio\Api\Request\ListAllTouristTaxCategoriesRequest;
 use Rentlio\Api\Request\ListAllUnitsRequest;
 use Rentlio\Api\Request\ListAllUnitTypesRequest;
 use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
+use Rentlio\Api\Request\ListGuestsForReservationRequest;
 use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
 use Rentlio\Api\Request\ListUnitTypeRatesRequest;
 use Rentlio\Api\Request\RequestInterface;
@@ -323,6 +329,18 @@ class Client
     }
 
     /**
+     * Calls api endpoint for adding new invoice items in bulk to reservation invoice.
+     * If there are no invoices for this reservation in draft status, new one will be created.
+     *
+     * @param CreateInvoiceItemForReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createInvoiceItems(CreateInvoiceItemForReservationInBulkRequest $request)
+    {
+        return $this->send($request);
+    }
+
+    /**
      * Calls api endpoint for updating availability, price and minStay restriction
      * on specific days for specified unit type.
      *
@@ -394,5 +412,68 @@ class Client
         $request->setDateTo($dateTo->format('Y-m-d'));
         return $this->send($request);
     }
+
+    /**
+     * Calls api endpoint for getting invoice details
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function getInvoiceDetails($invoiceId)
+    {
+        $request = new GetInvoiceDetailsRequest($invoiceId);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting all reservations in date range
+     * for specified propertyId where reservation holders that are checked-in in some date range
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listGuestsForReservation($reservationsId)
+    {
+        $request = new ListGuestsForReservationRequest($reservationsId);
+        return $this->send($request);
+    }
+
+
+    /**
+     * Calls api endpoint for making check-in of the reservation
+     *
+     * @param integer $reservationsId
+     * @param boolean $checkIn
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function checkInReservation($reservationsId, $checkIn)
+    {
+        $request = new CheckInRequest($reservationsId, $checkIn);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for making check-out of the reservation
+     *
+     * @param integer $reservationsId
+     * @param boolean $checkOut
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function checkOutReservation($reservationsId, $checkOut)
+    {
+        $request = new CheckOutRequest($reservationsId, $checkOut);
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for creating new reservation in Rentlio.
+     *
+     * @param CreateNewReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createReservation(CreateNewReservationRequest $request)
+    {
+        return $this->send($request);
+    }
+
 
 }
