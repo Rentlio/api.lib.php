@@ -5,6 +5,7 @@ namespace Rentlio\Api;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
@@ -318,6 +319,18 @@ class Client
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function createInvoiceItem(CreateInvoiceItemForReservationRequest $request)
+    {
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for adding new invoice items in bulk to reservation invoice.
+     * If there are no invoices for this reservation in draft status, new one will be created.
+     *
+     * @param CreateInvoiceItemForReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createInvoiceItems(CreateInvoiceItemForReservationInBulkRequest $request)
     {
         return $this->send($request);
     }
