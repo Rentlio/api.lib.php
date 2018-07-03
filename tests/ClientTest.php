@@ -358,4 +358,26 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $request->getBody()->getContents()
         );
     }
+
+    public function testCheckOutRequest()
+    {
+        $checkOut = new \Rentlio\Api\Request\Data\CheckIn(true);
+        $this->client->checkInReservation(1, $checkOut);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('PUT', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/1/checkin',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '{"checkIn":true}',
+            $request->getBody()->getContents()
+        );
+    }
 }

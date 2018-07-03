@@ -2,6 +2,8 @@
 
 namespace Rentlio\Api\Request;
 
+use Rentlio\Api\Request\Data\CheckIn;
+
 /**
  * Class CheckInRequest
  * @package Rentlio\Api\Request
@@ -11,9 +13,15 @@ namespace Rentlio\Api\Request;
  */
 class CheckInRequest extends AbstractRequest
 {
-    public function __construct($id)
+    /**
+     * @var CheckIn
+     */
+    protected $checkIn;
+
+    public function __construct($id, CheckIn $checkIn = null)
     {
         parent::__construct("PUT", "/reservations/" . $id . "/checkin");
+        $this->checkIn = $checkIn;
     }
 
     /**
@@ -22,5 +30,21 @@ class CheckInRequest extends AbstractRequest
     public function getQueryParams()
     {
         return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getSortAndPagingParams()
+    {
+        return [];
+    }
+
+    /**
+     * @return CheckIn
+     */
+    public function jsonSerialize()
+    {
+        return $this->checkIn;
     }
 }
