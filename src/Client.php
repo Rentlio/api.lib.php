@@ -27,6 +27,7 @@ use Rentlio\Api\Request\ListAllTouristTaxCategoriesRequest;
 use Rentlio\Api\Request\ListAllUnitsRequest;
 use Rentlio\Api\Request\ListAllUnitTypesRequest;
 use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
+use Rentlio\Api\Request\ListGuestsForReservationRequest;
 use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
 use Rentlio\Api\Request\ListUnitTypeRatesRequest;
 use Rentlio\Api\Request\RequestInterface;
@@ -423,6 +424,18 @@ class Client
         return $this->send($request);
     }
 
+    /**
+     * Calls api endpoint for getting all reservations in date range
+     * for specified propertyId where reservation holders that are checked-in in some date range
+     *
+     * @param $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listGuestsForReservation($reservationsId)
+    {
+        $request = new ListGuestsForReservationRequest($reservationsId);
+        return $this->send($request);
+    }
 
 
     /**
@@ -461,7 +474,6 @@ class Client
     {
         return $this->send($request);
     }
-
 
 
 }
