@@ -358,4 +358,23 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $request->getBody()->getContents()
         );
     }
+
+
+    public function testGetInvoiceDetails()
+    {
+        $this->client->getInvoiceDetails(365);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/invoices/365',
+            (string)$request->getUri()
+        );
+        $this->assertEmpty($request->getBody()->getContents());
+    }
 }

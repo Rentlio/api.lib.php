@@ -23,4 +23,12 @@ class GetInvoiceDetailsRequest extends AbstractRequest
     {
         return [];
     }
+
+    /**
+     * @return array
+     */
+    public function getSortAndPagingParams()
+    {
+        return [];
+    }
 }
