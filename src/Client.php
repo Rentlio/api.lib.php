@@ -10,6 +10,7 @@ use Rentlio\Api\Request\CheckInRequest;
 use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\CreateNewReservationRequest;
+use Rentlio\Api\Request\GetInvoiceDetailsRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
 use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
@@ -408,6 +409,17 @@ class Client
         $request = new ListAllCheckedInGuestsRequest($propertyId);
         $request->setDateFrom($dateFrom->format('Y-m-d'));
         $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for getting invoice details
+     *
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function getInvoiceDetails($invoiceId)
+    {
+        $request = new GetInvoiceDetailsRequest($invoiceId);
         return $this->send($request);
     }
 
