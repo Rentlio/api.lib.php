@@ -400,9 +400,11 @@ class Client
     /**
      * Calls api endpoint for making check-out on reservation
      *
+     * @param integer $reservationsId
+     * @param boolean $checkOut
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
-    public function checkoutReservation($reservationsId, CheckOut $checkOut)
+    public function checkoutReservation($reservationsId, $checkOut)
     {
         $request = new CheckOutRequest($reservationsId, $checkOut);
         return $this->send($request);

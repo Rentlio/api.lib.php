@@ -2,8 +2,6 @@
 
 namespace Rentlio\Api\Request;
 
-use Rentlio\Api\Request\Data\CheckOut;
-
 /**
  * Class CheckOutRequest
  * @package Rentlio\Api\Request
@@ -14,21 +12,21 @@ use Rentlio\Api\Request\Data\CheckOut;
 class CheckOutRequest extends AbstractRequest
 {
     /**
-     * @var CheckOut
+     * @var boolean
      */
     protected $checkOut;
 
-    public function __construct($id, CheckOut $checkOut = null)
+    public function __construct($id, $checkOut = null)
     {
         parent::__construct("PUT", "/reservations/" . $id . "/checkout");
         $this->checkOut = $checkOut;
     }
 
     /**
-     * @param CheckOut $update
+     * @param boolean $checkOut
      * @return $this
      */
-    public function setCheckOut(CheckOut $checkOut)
+    public function setCheckOut($checkOut)
     {
         $this->checkOut = $checkOut;
         return $this;
@@ -55,7 +53,9 @@ class CheckOutRequest extends AbstractRequest
      */
     public function jsonSerialize()
     {
-        return $this->checkOut;
+        return [
+            'checkOut' => $this->checkOut
+        ];
     }
 
 }
