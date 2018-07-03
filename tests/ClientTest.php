@@ -390,7 +390,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $request->getMethod());
         $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
         $this->assertEquals(
-            'https://api.rentl.io/v1/properties /365/invoices?order_by=id&order_direction=ASC&page=1',
+            'https://api.rentl.io/v1/properties/365/invoices?order_by=id&order_direction=ASC&page=1',
             (string)$request->getUri()
         );
         $this->assertEmpty($request->getBody()->getContents());
