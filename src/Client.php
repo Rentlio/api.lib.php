@@ -400,9 +400,11 @@ class Client
     /**
      * Calls api endpoint for making check-in of the reservation
      *
+     * @param integer $reservationsId
+     * @param boolean $checkIn
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
-    public function checkInReservation($reservationsId, CheckIn $checkIn)
+    public function checkInReservation($reservationsId, $checkIn)
     {
         $request = new CheckInRequest($reservationsId, $checkIn);
         return $this->send($request);

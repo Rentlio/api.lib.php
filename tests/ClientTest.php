@@ -359,10 +359,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCheckOutRequest()
+    public function testCheckInRequest()
     {
-        $checkOut = new \Rentlio\Api\Request\Data\CheckIn(true);
-        $this->client->checkInReservation(1, $checkOut);
+        $this->client->checkInReservation(1, true);
 
         /**
          * @var $request \Psr\Http\Message\RequestInterface

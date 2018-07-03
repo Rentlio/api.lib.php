@@ -2,8 +2,6 @@
 
 namespace Rentlio\Api\Request;
 
-use Rentlio\Api\Request\Data\CheckIn;
-
 /**
  * Class CheckInRequest
  * @package Rentlio\Api\Request
@@ -14,11 +12,11 @@ use Rentlio\Api\Request\Data\CheckIn;
 class CheckInRequest extends AbstractRequest
 {
     /**
-     * @var CheckIn
+     * @var bool
      */
     protected $checkIn;
 
-    public function __construct($id, CheckIn $checkIn = null)
+    public function __construct($id, $checkIn = null)
     {
         parent::__construct("PUT", "/reservations/" . $id . "/checkin");
         $this->checkIn = $checkIn;
@@ -45,6 +43,8 @@ class CheckInRequest extends AbstractRequest
      */
     public function jsonSerialize()
     {
-        return $this->checkIn;
+        return [
+            'checkIn' => $this->checkIn,
+        ];
     }
 }
