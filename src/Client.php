@@ -5,6 +5,7 @@ namespace Rentlio\Api;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Rentlio\Api\Request\AbstractRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CheckInRequest;
 use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
@@ -326,6 +327,18 @@ class Client
     }
 
     /**
+     * Calls api endpoint for adding new invoice items in bulk to reservation invoice.
+     * If there are no invoices for this reservation in draft status, new one will be created.
+     *
+     * @param CreateInvoiceItemForReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createInvoiceItems(CreateInvoiceItemForReservationInBulkRequest $request)
+    {
+        return $this->send($request);
+    }
+
+    /**
      * Calls api endpoint for updating availability, price and minStay restriction
      * on specific days for specified unit type.
      *
@@ -425,7 +438,7 @@ class Client
         $request = new CheckOutRequest($reservationsId, $checkOut);
         return $this->send($request);
     }
-    
+
     /**
      * Calls api endpoint for creating new reservation in Rentlio.
      *

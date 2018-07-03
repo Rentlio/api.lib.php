@@ -359,6 +359,38 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
+
+    public function testCreateInvoiceItemsBulk()
+    {
+        $request = new \Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest(123);
+
+        $itemCola = new \Rentlio\Api\Request\Data\InvoiceItem("cola", 123.33, 0.5);
+        $itemCola->addPDVTax(13);
+
+        $itemBurger = new \Rentlio\Api\Request\Data\InvoiceItem("Angus Burger", 79.80, 1);
+        $itemBurger->addPDVTax(13);
+
+        $request->setInvoiceItems([$itemCola, $itemBurger]);
+
+        $this->client->createInvoiceItems($request);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/reservations/123/invoices/items/bulk',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '[{"description":"cola","price":123.33,"quantity":0.5,"taxes":[{"label":"PDV","rate":13}]},{"description":"Angus Burger","price":79.8,"quantity":1,"taxes":[{"label":"PDV","rate":13}]}]',
+            $request->getBody()->getContents()
+        );
+    }
+
     public function testCheckInRequest()
     {
         $this->client->checkInReservation(1, true);
@@ -382,7 +414,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testCheckOutRequest()
     {
-        $this->client->checkoutReservation(1, true);
+        $this->client->checkOutReservation(1, true);
 
         /**
          * @var $request \Psr\Http\Message\RequestInterface
@@ -400,7 +432,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $request->getBody()->getContents()
         );
     }
-  
+
     public function testCreateNewReservation()
     {
         $reservation = new Rentlio\Api\Request\Data\Reservation(123, '2018-07-23', '2018-07-25', 1, 2);
