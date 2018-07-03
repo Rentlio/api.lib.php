@@ -70,11 +70,13 @@ class Reservation implements \JsonSerializable
      */
     protected $expiryYear;
 
-    public function __construct($unitTypeId, $dateFrom, $dateTo)
+    public function __construct($unitTypeId, $dateFrom, $dateTo, $rooms, $persons)
     {
         $this->unitTypeId = $unitTypeId;
         $this->dateFrom   = $dateFrom;
         $this->dateTo     = $dateTo;
+        $this->rooms      = $rooms;
+        $this->persons    = $persons;
     }
 
     /**

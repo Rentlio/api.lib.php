@@ -4,7 +4,7 @@ class ReservationTest extends PHPUnit_Framework_TestCase
 {
     public function testJsonSerialize()
     {
-        $reservation = new \Rentlio\Api\Request\Data\Reservation(1, (new \DateTime())->modify('+1 day')->getTimestamp(), (new \DateTime())->modify('+5 day')->getTimestamp());
+        $reservation = new \Rentlio\Api\Request\Data\Reservation(1, (new \DateTime())->modify('+1 day')->getTimestamp(), (new \DateTime())->modify('+5 day')->getTimestamp(), 1, 2);
         $data        = $reservation->jsonSerialize();
 
         $this->assertArrayHasKey('unitTypeId', $data);
