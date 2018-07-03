@@ -11,6 +11,7 @@ use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
 use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetInvoiceDetailsRequest;
+use Rentlio\Api\Request\GetInvoicesByPropertyRequest;
 use Rentlio\Api\Request\GetMyDataRequest;
 use Rentlio\Api\Request\ListAllArrivalArrangementsRequest;
 use Rentlio\Api\Request\ListAllCheckedInGuestsRequest;
@@ -330,6 +331,18 @@ class Client
         $request = new ListUnitTypeRestrictionsRequest($unitTypeId);
         $request->setDateFrom($dateFrom->format('Y-m-d'));
         $request->setDateTo($dateTo->format('Y-m-d'));
+        return $this->send($request);
+    }
+
+    /**
+     * Calls api endpoint for listing invoices attached to specific property.
+     *
+     * @param  $propertyId
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function getInvoicesByProperty($propertyId)
+    {
+        $request = new GetInvoicesByPropertyRequest($propertyId);
         return $this->send($request);
     }
 
