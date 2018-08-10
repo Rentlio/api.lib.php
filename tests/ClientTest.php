@@ -485,6 +485,37 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCreateSmartCardInvoiceItemsBulk()
+    {
+        $request = new \Rentlio\Api\Request\CreateInvoiceItemForSmartCardInBulk(10,'some-code-for-test');
+
+        $itemCola = new \Rentlio\Api\Request\Data\InvoiceItem("cola", 123.33, 0.5);
+        $itemCola->addPDVTax(13);
+
+        $itemBurger = new \Rentlio\Api\Request\Data\InvoiceItem("Angus Burger", 79.80, 1);
+        $itemBurger->addPDVTax(13);
+
+        $request->setInvoiceItems([$itemCola, $itemBurger]);
+
+        $this->client->createSmartCardInvoiceItems($request);
+
+        /**
+         * @var $request \Psr\Http\Message\RequestInterface
+         */
+        $request = $this->container[0]['request'];
+
+        $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('some api key', $request->getHeader('apiKey')[0]);
+        $this->assertEquals(
+            'https://api.rentl.io/v1/smart-card/10/some-code-for-test/invoices/items/bulk',
+            (string)$request->getUri()
+        );
+        $this->assertEquals(
+            '[{"description":"cola","price":123.33,"quantity":0.5,"taxes":[{"label":"PDV","rate":13}]},{"description":"Angus Burger","price":79.8,"quantity":1,"taxes":[{"label":"PDV","rate":13}]}]',
+            $request->getBody()->getContents()
+        );
+    }
+
     public function testCheckInRequest()
     {
         $this->client->checkInReservation(1, true);

@@ -9,6 +9,7 @@ use Rentlio\Api\Request\CheckInRequest;
 use Rentlio\Api\Request\CheckOutRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationInBulkRequest;
 use Rentlio\Api\Request\CreateInvoiceItemForReservationRequest;
+use Rentlio\Api\Request\CreateInvoiceItemForSmartCardInBulk;
 use Rentlio\Api\Request\CreateNewReservationRequest;
 use Rentlio\Api\Request\GetInvoiceDetailsRequest;
 use Rentlio\Api\Request\GetInvoicesByPropertyRequest;
@@ -383,6 +384,20 @@ class Client
     {
         return $this->send($request);
     }
+
+    /**
+     * Calls api endpoint for adding new invoice items in bulk to reservation invoice. It uses smart card attached to the
+     * guest on checked-in reservation and it enables creating the draft invoice on each guest on reservation separately.
+     * If there are no invoices for this reservation in draft status, new one will be created.
+     *
+     * @param CreateInvoiceItemForReservationRequest $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function createSmartCardInvoiceItems(CreateInvoiceItemForSmartCardInBulk $request)
+    {
+        return $this->send($request);
+    }
+
 
     /**
      * Calls api endpoint for updating availability, price and minStay restriction
