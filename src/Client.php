@@ -30,6 +30,7 @@ use Rentlio\Api\Request\ListAllTouristTaxCategoriesRequest;
 use Rentlio\Api\Request\ListAllUnitsRequest;
 use Rentlio\Api\Request\ListAllUnitTypesRequest;
 use Rentlio\Api\Request\ListAvailableUnitTypesRequest;
+use Rentlio\Api\Request\ListCheckedInGuestForSmartCodeRequest;
 use Rentlio\Api\Request\ListGuestsForReservationRequest;
 use Rentlio\Api\Request\ListUnitTypeAvailabilityRequest;
 use Rentlio\Api\Request\ListUnitTypeRatesRequest;
@@ -377,7 +378,7 @@ class Client
      * Calls api endpoint for adding new invoice items in bulk to reservation invoice.
      * If there are no invoices for this reservation in draft status, new one will be created.
      *
-     * @param CreateInvoiceItemForReservationRequest $request
+     * @param CreateInvoiceItemForReservationInBulkRequest $request
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function createInvoiceItems(CreateInvoiceItemForReservationInBulkRequest $request)
@@ -390,7 +391,7 @@ class Client
      * guest on checked-in reservation and it enables creating the draft invoice on each guest on reservation separately.
      * If there are no invoices for this reservation in draft status, new one will be created.
      *
-     * @param CreateInvoiceItemForReservationRequest $request
+     * @param CreateInvoiceItemForSmartCardInBulk $request
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function createSmartCardInvoiceItems(CreateInvoiceItemForSmartCardInBulk $request)
@@ -475,6 +476,7 @@ class Client
     /**
      * Calls api endpoint for getting invoice details
      *
+     * @param integer $invoiceId
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function getInvoiceDetails($invoiceId)
@@ -487,7 +489,7 @@ class Client
      * Calls api endpoint for getting all reservations in date range
      * for specified propertyId where reservation holders that are checked-in in some date range
      *
-     * @param $propertyId
+     * @param integer $reservationsId
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function listGuestsForReservation($reservationsId)
@@ -534,5 +536,17 @@ class Client
         return $this->send($request);
     }
 
-
+    /**
+     * Calls api endpoint for getting all reservations in date range
+     * for specified propertyId where reservation holders that are checked-in in some date range
+     *
+     * @param integer $propertiesId
+     * @param string $smartCardCode
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function listCheckedInGuestForSmartCode($propertiesId, $smartCardCode)
+    {
+        $request = new ListCheckedInGuestForSmartCodeRequest($propertiesId, $smartCardCode);
+        return $this->send($request);
+    }
 }
